@@ -1,0 +1,151 @@
+require 'sinatra'
+require 'nokogiri'
+require 'open-uri'
+
+get '/' do
+	
+	html = open("https://blog.makeitreal.camp/")
+	doc = Nokogiri::HTML(html)
+
+	doc.search('.secret').map do |element|
+	 return element.inner_text
+	end
+end
+----------------------------------------------------
+require "erb"
+require 'sinatra'
+
+get '/' do
+
+	template = %(
+		<html>
+		    <body>
+			    <h1> <%= greet %></h1>
+				<%  fifty.each do |element|%>
+					<% if element.even? == true %>
+						<h2> <%= element %> Soy par! </h2>
+					<% elsif element.odd? == true%>
+					    <h2> <%= element %> Soy impar! </h2>
+					<% end %>
+				    
+				<% end %>
+		    </body>
+		</html> 
+	)
+
+	greet = "Hola!"
+	fifty = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+	21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
+	40,41,42,43,44,45,46,47,48,49,50]
+
+	html = ERB.new(template).result(binding)
+	return html
+end
+----------------------------------------------------------
+require "erb"
+require 'sinatra'
+
+get '/' do
+
+	template = %(
+	<html>
+    	<body>
+    		<form action="/">
+    		  <h1 style="text-align:left;float:left;">Mi cuenta es :&nbsp;</h1>
+    		  <h1 style="text-align:left;float:left;">#{params[:number]}</h1>
+			  <input type="hidden" value="<%= params[:number].to_i + 1 %>" name="number">
+			  <input type="submit" value="Suma!!" style="position: relative;top:80px;left:-260px;">
+			</form>
+			
+        </body>
+	</html>)
+
+	html = ERB.new(template).result(binding)
+	return html
+end
+-------------------------------------------------
+require "erb"
+require 'sinatra'
+require 'json'
+
+
+get '/' do
+
+	template = %(
+	<html>
+    	<body>
+    		<h1 style="text-align:left;float:left;">Mi cuenta es :&nbsp;</h1><h1 id="num"> 0</h1>
+	    	<button type="button" >Suma!!</button>
+	    	
+	    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	    	<script>
+	    		$("button").click(function() {     
+    				$('#num').html(function(i, val) { return +val+1 }).val();
+			        var nombre = sessionStorage.getItem("num");
+			        localStorage.setItem("num", nombre);
+			        document.getElementById("nombre").innerHTML = nombre;
+				});
+	    	</script>
+        </body>
+	</html>)
+
+	html = ERB.new(template).result(binding)
+	return html
+end
+--------------------------------------
+equire "erb"
+require 'sinatra'
+
+get '/' do
+
+	template = %(
+	<html>
+    	<body>
+    		<form action="/">
+    		  <h1 style="text-align:left;float:left;">Mi cuenta es :&nbsp;</h1>
+    		  <h1 style="text-align:left;float:left;">#{params[:number]}</h1>
+			  <input type="hidden" value="<%= params[:number].to_i + 1 %>" name="number">
+			  <input type="submit" value="Suma!!" style="position: relative;top:80px;left:-260px;">
+			</form>
+			
+        </body>
+	</html>)
+
+	html = ERB.new(template).result(binding)
+	return html
+end
+-------------------------------------------
+<form action="/ruta/pagina" method="post">
+  <h1>Abuela Sorda</h1>
+  <p>Di algo Abuela:</p>
+  <input type="text" name="phrase" > <input type="submit" value="Dilo!">
+</form>
+-----
+require "sinatra"
+
+get '/' do
+	@value = params[:phrase]
+  	erb :view
+end
+
+post '/ruta/pagina' do
+	if params[:phrase] == params[:phrase].upcase
+		return "<h1> Ahhh si, manzanas! </h1>"
+	elsif params[:phrase] == params[:phrase].downcase
+		return "<h1> Habla más duro mijito </h1>"
+	end
+end
+-------------------------------------------
+require 'mechanize'
+require 'sinatra'
+require "net/https"
+require "uri"
+require "browser"
+
+get '/' do
+	  
+  browser = Browser.new("Some User Agent", accept_language: "en-us")
+  return browser.name
+end
+------------------
+

@@ -1,0 +1,43 @@
+https://developer.mozilla.org/es/docs/Learn
+
+bundle exec rails webpacker:install
+
+1. rails generate(g) controller Home idex 
+(Home, es el nombre del controlador e index es la acción)
+2. yarn add bootstrap
+3. app/javascripts/packs/application.js (require("bootstrap")/import 'boot...')
+yarn add jquery popper.js
+4. What's webpack?
+http://youtube.com/watch?v=SSuycjlgtd8
+5. {} package.json ("bootstarp": "^4.3.1") se escribe versión reciente y luego
+boooom!! yarn install en la terminal
+6. rails g model Article
+7. rails db:migrate (rails db:rollback) deshace la ultima migración ejecutada
+8. rails action_text:install
+9. rails db:migrate
+10. rails console(c) ==> Article.find(0..100) Buscar articulos
+11. article = Article.find(2)
+12. article.title
+13. rails routes (Muesra los nombres de todas las rutas del proyecto)
+14. usar sass en js es mejor porque es verificado todo por webpack
+15. gem devise (in the gemfile)
+16. rails g devise:install 
+17. rails g devise User
+18. url localhost:3000/users/sign_up (sign_in)
+19. rails g devise:vierws (generar vistas para modificar mensajes por default)
+20. rails g migration add_user_id_to_articles
+21. rails g migration add_user_id_to_articles user:references (add_reference :articles, :user, null: false, foreign_key: true, default: 1)
+22. rails db:migrate
+23. Article.last / User.find(1)
+24. Article.last.user (Corrobora el ultimo usuario creado en db)
+25. rails g scaffold Category title color (Crea el CRUD de un modelo. cuando se deja un campo vacío por defecto es un string)
+26. rails g model HasCategory article:references category:refe
+rences
+27. rails db:migrate
+28. HasCategory.count
+29. Article.find(1).categories
+30. solve error to delete article in db (has_many :has_categories, dependent: :delete_all)
+31. HasCategory.destroy_all (Elimina todos los registros)
+32. rails g controller Users edit
+
+
